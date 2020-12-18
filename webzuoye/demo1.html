@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>登录界面</title>
+    <style>
+        body{
+            background: url(p1.jpg);
+        }
+        #box{
+            width: 200px;
+            height:220px;
+            margin-left: 200px;
+            background-color:yellow;
+            float: left;
+        }
+        .txt{
+            width: 150px;
+            height:50px;
+            color:blue;
+            font-size: 20px;
+            font-weight: 900;
+            margin-top: 50px;
+            margin-left: 25px;
+        }
+        #time{
+            width: 150px;
+            height:50px;
+            color:blue;
+            font-size: 30px;
+            font-weight: 900;
+            margin-top: 50px;
+            margin-left: 30px;
+        }
+
+        #div1{
+            margin-left: 600px;
+            margin-top: 200px;
+            width: 320px;
+            height: 400px;
+        }
+        #first{
+            width: 300px;
+            height: 40px;
+            padding-left: 15px;
+            margin-top: 30px;
+            align-items: center;
+            border: 1px solid black;
+            display: flex;
+        }
+        #second{
+            width: 300px;
+            height: 40px;
+            padding-left: 15px;
+            margin-top: 30px;
+            align-items: center;
+            border: 1px solid black;
+            display: flex;
+        }
+        #content{
+            margin-top: 30px;
+            width: 316px;
+            height: 40px;
+            outline: none;
+            border: none;
+            font-size: 15px;
+            color: white;
+            background-color: blue;
+        }
+        #input1{
+            border: 1px solid;
+            border-width: 0px;
+            outline: none;
+        }
+        #input2{
+            border:1px solid;
+            border-width: 0px;
+            outline: none;
+        }
+        #remind_1{
+            height: 10px;
+            font-size: 8px;
+            color: grey;
+        }
+        #remind_2{
+            height: 10px;
+            font-size: 8px;
+            color: grey;
+        }
+    </style>
+</head>
+<body>
+    <div id="box">
+        <div class="txt">22点秒杀倒计时</div>
+        <div id="time"></div>
+    </div>
+    <div id="div1">
+        <form>
+            <div id="first">
+                <label for="">用户名&nbsp&nbsp</label><input id="input1" type="text" name="user"  onfocus="oFous_1()">
+            </div>
+            <!--input的value为空时弹出提醒 -->
+            <p id="remind_1"></p>
+            <div id="second">
+                <label for="">设密码&nbsp&nbsp</label><input id="input2" type="password" name="password" onfocus="oFous_2()">
+            </div>
+            <!--input为空时弹出提醒-->
+            <p id="remind_2"></p>
+        </form>  
+        <button id="content" type="submit">注册并登录</button>
+    </div>
+</body>
+<script>
+    var time=document.getElementById("time");
+    var setTime=+new Date("2021-12-31 22:00:00");
+    countDown();
+
+    setInterval(countDown,1000);//每一秒钟调用一次函数
+    function countDown(){
+        var nowTime=+new Date(); //返回的是当前时间的总的毫秒数
+        var total=(setTime-nowTime)/1000; 
+        var hr=parseInt(total/60/60%24);
+        hr=hr<10?'0'+hr:hr;//数值小于10时 0-9改为 00-09
+        var min=parseInt(total/60%60);
+        min=min<10?'0'+min:min;
+        var sec=parseInt(total%60);
+        sec=sec<10?'0'+sec:sec;
+        time.innerHTML=hr+":"+min+":"+sec;
+    }
+    //登录框
+    var a = document.getElementById("input1");
+    var b = document.getElementById("input2");
+    var content = document.getElementById("content");
+    a.onblur = function(){
+        if(a.value ==""){
+            document.getElementById("remind_1").innerHTML="用户名不能为空";
+        }else{
+            document.getElementById("remind_1").innerHTML="";
+        }
+    }
+     function oFous_1(){
+        document.getElementById("remind_1").innerHTML = "支持中文数字";
+    }
+    b.onblur = function(){
+        if(b.value==""){
+            document.getElementById("remind_2").innerHTML="密码不能为空";
+        }else{
+            document.getElementById("remind_2").innerHTML="";
+        }
+    }
+    function oFous_2(){
+        document.getElementById("remind_2").innerHTML="建议使用两种字符组合";
+    }
+    content.onclick = function(){
+        if(a.value != ""){
+            if(b.value != ""){
+                var str = "注册成功   用户名：" + a.value + "    密码：" + b.value;
+                //window.location.href="C://Users//HP//Documents//web二文件夹//大作业//demo1-1.html"; 
+                window.location.href="https://wangshikangz.github.io/webtask8/web/demo1-1.html";
+            }
+            alert(str);
+        }  
+    }
+</script>
+</html>
