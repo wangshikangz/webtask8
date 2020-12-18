@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>内部界面</title>
+    <style>
+        #box{
+            width: 600px;
+            height: 500px;
+            margin-top: 50px;
+            margin-left: 50px;
+            float: left;
+        }
+        #list{
+            list-style: none;
+            bottom: 5px;
+            left: 240px;
+            margin: 0%;
+        }
+        .li{
+            float: left;
+            width: 20px;
+            height: 20px;
+            font-size: 20px;
+            background-color: darkgray;
+            margin-right: 10px;
+            text-align: center;
+            line-height: 20px;
+            border-radius: 50%;
+        }
+        #box2{
+            margin-left: 900px;
+            height: 590px;
+            width: 300px;
+            border: 1px solid cornsilk;
+            background-color: cornsilk;
+        }
+        #p1{
+            font-size:20px;
+            margin-top: 50px;
+        }
+        #p2{
+            font-size: 20px;
+            margin-top: 200px;
+        }
+        #p1,a{
+            text-decoration:none ;
+        }
+    </style>
+</head>
+<body>
+    <div id="box">
+        <img width="600px" height="500px" id="img" src="img/0.jpg"/>
+        <ul id="list">
+            <li class="li">1</li>
+            <li class="li">2</li>
+            <li class="li">3</li>
+            <li class="li">4</li>
+            <li class="li">5</li>
+            <li class="li">6</li>
+            <li class="li">7</li>
+            <li class="li">8</li>
+        </ul>
+    </div>
+    <div id="box2">
+        <p id="p1">
+            <a href="#">家用电器</a>
+            <span>/</span>
+            <a href="#">手机</a>
+            <span>/</span>
+            <a href="#">运营商</a>
+            <span>/</span>
+            <a href="#">数码</a>
+            <span>/</span>
+            <a href="#">电脑</a>
+            <span>/</span>
+            <a href="#">办公</a>
+            <span>/</span>
+            <a href="#">家居</a>
+            <span>/</span>
+            <a href="#">男鞋</a>
+            <span>/</span>
+            <a href="#">女装</a>
+            <span>/</span>
+            <a href="#">钟表</a>
+            <span>/</span>
+            <a href="#">美妆</a>
+            <span>/</span>
+            <a href="#">食品</a>
+            <span>/</span>
+            <a href="#">珠宝</a>
+            <span>/</span>
+            <a href="#">房产</a>
+            <span>/</span>
+            <a href="#">汽车</a>
+            <span>/</span>
+            <a href="#">礼品鲜花</a>
+            <span>/</span>
+            <a href="#">图书</a>
+            <span>/</span>
+            <a href="#">文娱</a>
+            <span>/</span>
+            <a href="#">酒类</a>
+            <span>/</span>
+            <a href="#">教育</a>
+            <span>/</span>
+            <a href="#">机票</a>
+        </p>
+        <p id="p2">
+            <a href="#">关于我们</a>
+            <span>|</span>
+            <a href="#">联系我们</a>
+            <span>|</span>
+            <a href="#">联系客服</a>
+            <span>|</span>
+            <a href="#">合作招商</a>
+            <span>|</span>
+            <a href="#">商家帮助</a>
+            <span>|</span>
+            <a href="#">营销中心</a>
+            <span>|</span>
+            <a href="#">友情链接</a>
+            <span>|</span>
+            <a href="#">风险检测</a>
+            <span>|</span>
+            <a href="#">隐私政策</a>
+            <span>|</span>
+            <a href="#">English Site</a>
+            <span>|</span>
+            <a href="#">售后服务</a>
+        </p>
+    </div>
+    <script>
+        var jsLis = document.getElementsByClassName("li");
+        var jsImg = document.getElementById("img");
+        var currentPage = 0;
+        var jsBox = document.getElementById("box");
+        //初始化第一个圆点为红
+        jsLis[0].style.backgroundColor = "red";
+        //创建定时器
+        var pTimer = setInterval(fun,1000);
+        function fun(){
+            currentPage++;
+            if(currentPage == 8){
+                currentPage = 0;
+            }
+            //修改图片
+            jsImg.src = "img/"+currentPage+".jpg";
+            //清空所有圆点的颜色
+            for (var i =0;i<jsLis.length;i++){
+                jsLis[i].style.backgroundColor="gray";
+            }
+            //修改圆点的颜色
+            jsLis[currentPage].style.backgroundColor="red";
+        }
+        //给box添加鼠标进入事件
+        jsBox.addEventListener("mousemove",function(){
+            clearInterval(pTimer);
+        },false)
+        jsBox.addEventListener("mouseout", function(){
+            pTimer = setInterval(fun, 1000);
+        },false)
+        //给圆点添加鼠标移入事件
+        for(var i = 0;i < jsLis.length;i++){
+            jsLis[i].onmouseover = function(){
+                currentPage = parseInt(this.innerHTML) - 1;
+                jsImg.src = "img/"+currentPage + ".jpg";
+                for (var i = 0;i<jsLis.length;i++){
+                    jsLis[i].style.backgroundColor = "gray";
+                }
+                jsLis[currentPage].style.backgroundColor = "red";
+            }
+        }
+    </script>
+</body>
+</html>
